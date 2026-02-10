@@ -46,22 +46,21 @@ export default function AboutPage() {
           </motion.div>
 
          <motion.div 
-  initial={{ opacity: 0, scale: 0.98 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.8, delay: 0.4 }}
-  // w-screen forces it to the device width, ignoring parent padding
-  // left-1/2 -translate-x-1/2 centers it if it's inside a container
-  className="relative w-screen h-100dvh left-1/2 -translate-x-1/2 overflow-hidden md:w-full md:left-0 md:translate-x-0 md:h-[70vh] md:rounded-sm"
->
-    <Image 
-      src="/img/about1.png"
-      alt="Studio Space" 
-      fill
-      className="object-cover"
-      priority
-    />
-    <div className="absolute inset-0 bg-black/10" />
-</motion.div>
+         initial={{ opacity: 0, scale: 0.98 }}
+         animate={{ opacity: 1, scale: 1 }}  
+         transition={{ duration: 0.8, delay: 0.4 }}
+         className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden rounded-sm"
+         >
+        <Image
+          src="/img/about1.png"
+           alt="Studio Space"
+           fill
+          className="object-cover"
+          priority 
+          />
+        {/* Overlay for text readability if needed, or just style */}
+      <div className="absolute inset-0 bg-black/10" />
+      </motion.div>
         </div>
       </section>
 

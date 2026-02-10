@@ -7,21 +7,33 @@ import Link from 'next/link';
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // 1. Check Password (Hardcoded as requested)
-    if (password === 'Surefore890Hint') {
-      // 2. Set a "Session" token in LocalStorage
-      // (This tells the browser "I am logged in")
-      localStorage.setItem('admin_session', 'true');
-      
-      // 3. Redirect to Dashboard
-      router.push('/admin');
-    } else {
-      setError('Incorrect password');
+    setLoading(true);
+    setError('');
+
+    try {
+      // 1. Send password to SERVER (Secure API)
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (res.ok) {
+        // 2. Success! Set the session token
+        localStorage.setItem('admin_session', 'true');
+        router.push('/admin');
+      } else {
+        setError('Incorrect password');
+      }
+    } catch (err) {
+      setError('Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,8 +63,11 @@ export default function AdminLogin() {
             <p className="text-red-500 text-xs text-center">{error}</p>
           )}
 
-          <button className="w-full bg-[#C19A6B] text-white py-4 font-bold tracking-widest text-sm rounded hover:bg-neutral-800 transition-colors">
-            ENTER DASHBOARD
+          <button 
+            disabled={loading}
+            className="w-full bg-[#C19A6B] text-white py-4 font-bold tracking-widest text-sm rounded hover:bg-neutral-800 transition-colors disabled:opacity-50"
+          >
+            {loading ? "VERIFYING..." : "ENTER DASHBOARD"}
           </button>
         </form>
         

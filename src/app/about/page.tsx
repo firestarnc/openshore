@@ -51,7 +51,7 @@ export default function AboutPage() {
   transition={{ duration: 0.8, delay: 0.4 }}
   // w-screen forces it to the device width, ignoring parent padding
   // left-1/2 -translate-x-1/2 centers it if it's inside a container
-  className="relative w-screen h-[100dvh] left-1/2 -translate-x-1/2 overflow-hidden md:w-full md:left-0 md:translate-x-0 md:h-[70vh] md:rounded-sm"
+  className="relative w-screen h-100dvh left-1/2 -translate-x-1/2 overflow-hidden md:w-full md:left-0 md:translate-x-0 md:h-[70vh] md:rounded-sm"
 >
     <Image 
       src="/img/about1.png"

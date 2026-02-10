@@ -8,15 +8,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 const categories = ["All", "Portrait", "Wedding", "Commercial", "Editorial"];
 
 const portfolioItems = [
-  { id: 1, category: "Portrait", src: "/img/hero11.png", title: "Elena in Studio" },
+  { id: 1, category: "Portrait", src: "/img/hero11.png", title: "Neta in Studio" },
   { id: 2, category: "Wedding", src: "/img/hero12.png", title: "The Waves" },
-  { id: 3, category: "Commercial", src: "/img/hero13.png", title: "Minimal Chair" },
-  { id: 4, category: "Editorial", src: "/img/hero14.png", title: "Vogue Style" },
+  { id: 3, category: "Commercial", src: "/img/hero13.png", title: "Timeless Lace" },
+  { id: 4, category: "Editorial", src: "/img/hero14.png", title: "Office Set" },
   { id: 5, category: "Portrait", src: "/img/hero15.png", title: "Golden Hour" },
   { id: 6, category: "Wedding", src: "/img/hero16.png", title: "First Dance" },
-  { id: 7, category: "Commercial", src: "/img/hero17.png", title: "Male Portrait" },
-  { id: 8, category: "Editorial", src: "/img/hero18.png", title: "Fashion Week" },
-  { id: 9, category: "Portrait", src: "/img/hero19.png", title: "Tech Product" },
+  { id: 7, category: "Commercial", src: "/img/hero17.png", title: "Growing Love" },
+  { id: 8, category: "Editorial", src: "/img/hero18.png", title: "Cloud Corner:" },
+  { id: 9, category: "Portrait", src: "/img/hero19.png", title: "Crystal Light" },
 ];
 
 export default function PortfolioGrid() {

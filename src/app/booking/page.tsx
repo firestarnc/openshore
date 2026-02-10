@@ -302,6 +302,7 @@ export default function BookingPage() {
           )}
         </div>
       </section>
+       {/* Footer */}
       <footer className="bg-[#C19A6B]  text-black py-20 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -332,17 +333,19 @@ export default function BookingPage() {
               <h4 className="text-sm font-bold tracking-widest mb-6">CONTACT</h4>
               <ul className="space-y-4 text-black font-light text-sm">
                 
-                {/* Email: Opens default mail app */}
+                {/* Email Link */}
                 <li>
                   <a 
                     href="mailto:contact@openshorestudios.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="hover:text-white/70 transition-colors"
                   >
                     contact@openshorestudios.com
                   </a>
                 </li>
 
-                {/* Phone: Triggers a call on mobile */}
+                {/* Phone Link (Usually better to stay in same tab to trigger call) */}
                 <li>
                   <a 
                     href="tel:+2347066446441" 
@@ -352,10 +355,10 @@ export default function BookingPage() {
                   </a>
                 </li>
 
-                {/* Map: Opens Google Maps directly to the address */}
+                {/* Maps Link */}
                 <li>
                   <a 
-                    href="https://www.google.com/maps/search/?api=1&query=52b+Airport+Road,+Benin+City,+Nigeria" 
+                    href="https://www.google.com/maps/search/?api=1&query=52b+Airport+road+Benin+city" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="hover:text-white/70 transition-colors"
@@ -363,16 +366,24 @@ export default function BookingPage() {
                     52b, Airport road Benin city
                   </a>
                 </li>
-                
+
               </ul>
             </div>
+
           </div>
 
           {/* Copyright */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-black font-light">
             <p>&copy; {new Date().getFullYear()} Open Shore Studio. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <Link href="https://www.instagram.com/open.shore/">Instagram</Link>
+                <a 
+                  href="https://www.instagram.com/open.shore/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C19A6B] transition-colors"
+                >
+                  Instagram
+                </a>
               <Link href="#">Twitter</Link>
               <Link href="#">LinkedIn</Link>
             </div>

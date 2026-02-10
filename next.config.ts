@@ -1,12 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // 1. We removed 'output: export' completely.
+  // 2. We allow images from ANY domain (like Supabase or Unsplash)
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', 
+      },
+    ],
   },
-  /* config options here */
-  reactCompiler: true,
-  };
+};
 
 export default nextConfig;

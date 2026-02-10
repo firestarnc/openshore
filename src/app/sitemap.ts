@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next'
 
+// Add this line here too
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://openshore.shop'
 

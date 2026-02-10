@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next'
 
+// Add this line to force it to be static
+export const dynamic = 'force-static'
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {

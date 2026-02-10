@@ -331,9 +331,39 @@ export default function BookingPage() {
             <div>
               <h4 className="text-sm font-bold tracking-widest mb-6">CONTACT</h4>
               <ul className="space-y-4 text-black font-light text-sm">
-                <li>hello@openshore.com</li>
-                <li>+234 (706) 644-6441</li>
-                <li>52b, Airport road Benin city</li>
+                
+                {/* Email: Opens default mail app */}
+                <li>
+                  <a 
+                    href="mailto:contact@openshorestudios.com" 
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    contact@openshorestudios.com
+                  </a>
+                </li>
+
+                {/* Phone: Triggers a call on mobile */}
+                <li>
+                  <a 
+                    href="tel:+2347066446441" 
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    +234 (706) 644-6441
+                  </a>
+                </li>
+
+                {/* Map: Opens Google Maps directly to the address */}
+                <li>
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=52b+Airport+Road,+Benin+City,+Nigeria" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    52b, Airport road Benin city
+                  </a>
+                </li>
+                
               </ul>
             </div>
           </div>

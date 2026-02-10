@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://openshorestudios.com'),
   title: "Open Shore | Professional Photography & Camera Rentals",
   description: "Premier photo studio in Lagos offering camera rentals, portrait sessions, and wedding photography.",
   icons: {

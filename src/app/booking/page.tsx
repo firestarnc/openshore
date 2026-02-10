@@ -216,8 +216,8 @@ export default function BookingPage() {
                     }}
                     className={`w-full py-4 px-4 text-sm border rounded transition-all flex justify-between items-center group ${
                       selectedTime === "Full Day (9:00 AM - 5:00 PM)"
-                        ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
-                        : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-[#C19A6B]/5'
+                        ? 'bg-[#C19A6B] text-white border-[#C19A6B]' 
+                        : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-neutral-50'
                     }`}
                   >
                     <span className="font-bold">Full Day Session</span>

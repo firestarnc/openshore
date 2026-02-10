@@ -204,9 +204,18 @@ export default function BookingPage() {
                 <div className="space-y-4">
                   {/* Option A: Full Day Button */}
                   <button
-                    onClick={() => setSelectedTime("Full Day (9:00 AM - 5:00 PM)")}
+                    type="button" // Important to prevent form submission
+                    onClick={() => {
+                      const fullDayText = "Full Day (9:00 AM - 5:00 PM)";
+                      // TOGGLE LOGIC: If already selected, clear it (''). Else, select it.
+                      if (selectedTime === fullDayText) {
+                        setSelectedTime(""); 
+                      } else {
+                        setSelectedTime(fullDayText);
+                      }
+                    }}
                     className={`w-full py-4 px-4 text-sm border rounded transition-all flex justify-between items-center group ${
-                      selectedTime.includes("Full Day") 
+                      selectedTime === "Full Day (9:00 AM - 5:00 PM)"
                         ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
                         : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-[#C19A6B]/5'
                     }`}

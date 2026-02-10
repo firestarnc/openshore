@@ -195,22 +195,57 @@ export default function BookingPage() {
               </div>
             </div>
 
-            {/* 3. Select Time */}
+          {/* 03. Select Time */}
             <div className="space-y-6">
               <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">03. Select Time</h2>
-              <div className="grid grid-cols-2 gap-3">
-                {timeSlots.map((time) => (
+              
+              {/* LOGIC: If Commercial, show "Full Day" or Custom Input. Else, show standard slots. */}
+              {selectedType === 'commercial' ? (
+                <div className="space-y-4">
+                  {/* Option A: Full Day Button */}
                   <button
-                    key={time}
-                    onClick={() => setSelectedTime(time)}
-                    className={`py-3 cursor-pointer text-sm border transition-all ${
-                      selectedTime === time ? 'bg-[#C19A6B] text-white' : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:border-neutral-200'
+                    onClick={() => setSelectedTime("Full Day (9:00 AM - 5:00 PM)")}
+                    className={`w-full py-4 px-4 text-sm border rounded transition-all flex justify-between items-center group ${
+                      selectedTime.includes("Full Day") 
+                        ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
+                        : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-[#C19A6B]/5'
                     }`}
                   >
-                    {time}
+                    <span className="font-bold">Full Day Session</span>
+                    <span className="opacity-80 text-xs">8 Hours</span>
                   </button>
-                ))}
-              </div>
+
+                  {/* Option B: Custom Time Input */}
+                  <div>
+                    <label className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-2 block">
+                      Or Enter Custom Time
+                    </label>
+                    <Input 
+                      placeholder="e.g. 10:00 AM - 2:00 PM"
+                      className="border-[#C19A6B] focus:ring-[#C19A6B] text-[#C19A6B] placeholder:text-gray-300"
+                      // If the user types here, we override the selectedTime state
+                      onChange={(e) => setSelectedTime(e.target.value)} 
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* STANDARD SLOTS (For Portrait/Wedding) */
+                <div className="grid grid-cols-2 gap-3">
+                  {timeSlots.map((time) => (
+                    <button
+                      key={time}
+                      onClick={() => setSelectedTime(time)}
+                      className={`py-3 px-4 text-sm border rounded transition-all ${
+                        selectedTime === time 
+                          ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
+                          : 'bg-white text-gray-600 border-gray-200 hover:border-[#C19A6B] hover:text-[#C19A6B]'
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

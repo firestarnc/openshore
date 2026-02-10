@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { Label } from "@/components/ui/label";
+import { ArrowRight } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -20,8 +21,8 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from 'next/link';
 
 const sessionTypes = [
-  { id: 'portrait', name: 'Portrait Session', price: '₦250', duration: '1.5 Hours', icons: ["/img/camera.png"] },
-  { id: 'wedding', name: 'Wedding Photography', price: '₦2,500', duration: '8 Hours', icons: ["/img/love.png"] },
+  { id: 'portrait', name: 'Portrait Session', price: '₦35,000', duration: '1 Hour', icons: ["/img/camera.png"] },
+  { id: 'wedding', name: 'Wedding Photography', price: '₦250,000', duration: '5 Hours', icons: ["/img/love.png"] },
   { id: 'commercial', name: 'Commercial Work', price: 'Custom', duration: 'Full Day', icons: ["/img/guide-book.png"] },
 ];
 
@@ -169,6 +170,16 @@ export default function BookingPage() {
                   </button>
                 ))}
               </div>
+             {/* NEW: Link to the Pricelist Page */}
+                <div className="flex justify-end">
+                  <Link 
+                    href="/pricelist" 
+                    className="group flex items-center gap-2 text-[#C19A6B] text-xs tracking-widest font-bold border-b border-transparent hover:border-[#C19A6B] pb-1 transition-all"
+                  >
+                    VIEW FULL PRICELIST
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
             </div>
 
             {/* 2. Select Date */}

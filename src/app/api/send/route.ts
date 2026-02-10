@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
     // 2. Email to ADMIN (Notification for you)
     const adminEmail = await resend.emails.send({
-      from: 'Open Shore System <system@openshorestudios.com>>',
+      from: 'Open Shore System <system@openshorestudios.com>',
       to: ['openshore01@gmail.com'], // <--- PUT YOUR PERSONAL EMAIL HERE
       subject: `New Booking: ${name} - ${date}`,
       html: `

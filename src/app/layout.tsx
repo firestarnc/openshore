@@ -16,8 +16,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Open Shore Photography Studio",
-  description: "Professional Photography Studio - Capturing Moments, Creating Memories.",
+  title: "Open Shore | Professional Photography & Camera Rentals",
+  description: "Premier photo studio in Lagos offering camera rentals, portrait sessions, and wedding photography.",
+  icons: {
+    icon: "/logo.svg", // Shows your logo in the browser tab
+  },
 };
 
 export default function RootLayout({

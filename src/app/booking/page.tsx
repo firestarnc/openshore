@@ -19,10 +19,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Link from 'next/link';
 
-// Data for session types
 const sessionTypes = [
-  { id: 'portrait', name: 'Portrait Session', price: '₦25,000', duration: '1.5 Hours', icons: ["/img/camera.png"] },
-  { id: 'wedding', name: 'Wedding Photography', price: '₦250,000', duration: '8 Hours', icons: ["/img/love.png"] },
+  { id: 'portrait', name: 'Portrait Session', price: '₦250', duration: '1.5 Hours', icons: ["/img/camera.png"] },
+  { id: 'wedding', name: 'Wedding Photography', price: '₦2,500', duration: '8 Hours', icons: ["/img/love.png"] },
   { id: 'commercial', name: 'Commercial Work', price: 'Custom', duration: 'Full Day', icons: ["/img/guide-book.png"] },
 ];
 
@@ -34,7 +33,7 @@ export default function BookingPage() {
   const [selectedTime, setSelectedTime] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Added 'location' to formData
+  // FIX 1: Added 'location' to state so we can capture it
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -53,6 +52,10 @@ export default function BookingPage() {
     setLoading(true);
 
     try {
+      // FIX 2: Construct a message that includes the location
+      // This ensures the location is saved to the DB without changing your database schema
+      const fullMessage = `Location: ${formData.location || 'Not specified'}\n\nUser Notes: ${formData.message}`;
+
       // 2. Save to Supabase
       const { error } = await supabase
         .from('bookings')
@@ -64,7 +67,7 @@ export default function BookingPage() {
             user_name: formData.name,
             user_email: formData.email,
             user_phone: formData.phone,
-            message: `Location: ${formData.location || 'Studio'}\n\n${formData.message}`, // Combine location into message or add column if you prefer
+            message: fullMessage, // Saving the combined message
             status: 'pending'
           },
         ]);
@@ -72,6 +75,7 @@ export default function BookingPage() {
       if (error) throw error;
 
       // 3. Send Email Notification (Resend API)
+      // FIX 3: Updated to send 'service', 'phone', and 'message' so the email template works
       const emailResponse = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -80,10 +84,10 @@ export default function BookingPage() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          service: sessionTypes.find(t => t.id === selectedType)?.name || selectedType,
+          service: sessionTypes.find(t => t.id === selectedType)?.name || selectedType, // Changed 'details' to 'service' to match API
           date: format(selectedDate, 'yyyy-MM-dd'),
           time: selectedTime,
-          message: `Location: ${formData.location}\nNotes: ${formData.message}`
+          message: fullMessage // Sending the full details
         })
       });
 
@@ -92,10 +96,8 @@ export default function BookingPage() {
       }
 
       alert('Booking request received! We sent a confirmation to your email.');
-      // Reset form
-      setSelectedType('');
-      setSelectedTime('');
-      setFormData({ name: "", email: "", phone: "", location: "", message: "" });
+      // Optional: Reset form or redirect
+      // window.location.href = '/';
 
     } catch (error: any) {
       console.error('Error saving booking:', error);
@@ -116,44 +118,52 @@ export default function BookingPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
-            {/* 01. Select Session Type */}
+            {/* 1. Select Session Type */}
             <div className="space-y-6">
               <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">01. Select Service</h2>
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
                 {sessionTypes.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedType(type.id)}
                     className={`
-                      w-full text-left p-6 cursor-pointer border rounded-lg
+                      w-full text-left p-6 cursor-pointer border-2 rounded-lg
                       transition-all duration-300 ease-out transform
-                      hover:shadow-lg active:scale-[0.98]
+                      hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]
+
                       ${
                         selectedType === type.id
-                          ? "border-[#C19A6B] bg-[#C19A6B]/5 shadow-md scale-[1.02]"
-                          : "border-gray-200 hover:border-[#C19A6B]"
+                          ? "border-neutral-200 bg-neutral-50 scale-[1.05] shadow-2xl"
+                          : "border-[#C19A6B] hover:border-neutral-200"
                       }
                     `}
                   >
-                    <div className="flex gap-4 items-center">
-                      {/* Icons (Assuming you have these images in public/img) */}
-                      <div className="flex flex-col gap-2">
-                         {type.icons.map((icon, i) => (
-                           <div key={i} className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                              {/* Using simplified img tag for icons */}
-                              <img src={icon} alt="icon" className="w-4 h-4 opacity-60" />
-                           </div>
-                         ))}
+                    <div className="flex gap-4">
+                      <div className="flex flex-col items-center gap-3">
+                        {type.icons.map((icon, index) => (
+                          <div
+                            key={index}
+                            className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center"
+                          >
+                            <img
+                              src={icon}
+                              alt=""
+                              className="h-5 w-5 object-contain"
+                            />
+                          </div>
+                        ))}
                       </div>
-
                       <div className="flex-1">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className={`font-serif font-medium ${selectedType === type.id ? 'text-[#C19A6B]' : 'text-black'}`}>
-                            {type.name}
+                        {selectedType === type.id && (
+                          <span className="text-xs px-2 py-1 rounded bg-neutral-50 text-[#C19A6B]">
+                            Selected
                           </span>
-                          <span className="text-sm font-bold text-[#C19A6B]">{type.price}</span>
+                        )}
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-[#C19A6B]">{type.name}</span>
+                          <span className="text-sm text-[#C19A6B] font-serif">{type.price}</span>
                         </div>
-                        <span className="text-xs text-gray-400 block">{type.duration}</span>
+                        <span className="text-xs text-gray-500">{type.duration}</span>
                       </div>
                     </div>
                   </button>
@@ -161,28 +171,20 @@ export default function BookingPage() {
               </div>
             </div>
 
-            {/* 02. Select Date */}
+            {/* 2. Select Date */}
             <div className="space-y-6">
               <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">02. Select Date</h2> 
-              <div className="border border-gray-200 p-4 rounded-lg flex justify-center bg-white shadow-sm">
+              <div className="border border-[#C19A6B] p-4 rounded-lg flex justify-center">
                 <DayPicker
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
                   disabled={{ before: new Date() }}
-                  modifiersClassNames={{
-                    selected: 'bg-[#C19A6B] text-white hover:bg-[#C19A6B]',
-                    today: 'text-[#C19A6B] font-bold'
-                  }}
-                  styles={{
-                    head_cell: { color: '#C19A6B' },
-                    day: { borderRadius: '50%' }
-                  }}
                 />
               </div>
             </div>
 
-            {/* 03. Select Time */}
+            {/* 3. Select Time */}
             <div className="space-y-6">
               <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">03. Select Time</h2>
               <div className="grid grid-cols-2 gap-3">
@@ -190,10 +192,8 @@ export default function BookingPage() {
                   <button
                     key={time}
                     onClick={() => setSelectedTime(time)}
-                    className={`py-3 px-4 text-sm border rounded transition-all ${
-                      selectedTime === time 
-                        ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
-                        : 'bg-white text-gray-600 border-gray-200 hover:border-[#C19A6B]'
+                    className={`py-3 cursor-pointer text-sm border transition-all ${
+                      selectedTime === time ? 'bg-[#C19A6B] text-white' : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:border-neutral-200'
                     }`}
                   >
                     {time}
@@ -203,113 +203,105 @@ export default function BookingPage() {
             </div>
           </div>
 
-          {/* User Details Form */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-16 pt-16 border-t border-gray-100"
-          >
-            <h2 className="font-serif text-[#C19A6B] text-3xl mb-8">Your Details</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-[#C19A6B]">Full Name</Label>
+          {/* User Details Form - OUTSIDE GRID */}
+          <div className="mt-12">
+            <h2 className="font-serif text-[#C19A6B] text-2xl font-medium text-foreground mb-6">
+              Your Details
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="text-[#C19A6B] space-y-2">
+                <Label htmlFor="name">Full Name</Label>
                 <Input
                   id="name"
                   placeholder="Your name"
-                  className="border-gray-200 focus:border-[#C19A6B] focus:ring-[#C19A6B]"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-[#C19A6B]">Email</Label>
+              <div className="text-[#C19A6B] space-y-2">
+                <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="your@email.com"
-                  className="border-gray-200 focus:border-[#C19A6B] focus:ring-[#C19A6B]"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-[#C19A6B]">Phone</Label>
+              <div className="text-[#C19A6B] space-y-2">
+                <Label htmlFor="phone">Phone</Label>
                 <Input
                   id="phone"
                   type="tel"
                   placeholder="(555) 000-0000"
-                  className="border-gray-200 focus:border-[#C19A6B] focus:ring-[#C19A6B]"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="session-location" className="text-[#C19A6B]">Preferred Location</Label>
+              <div className="text-[#C19A6B] space-y-2">
+                <Label htmlFor="session-location">Preferred Location</Label>
+                {/* FIX 4: Connected Select to state using value and onValueChange */}
                 <Select 
                   value={formData.location} 
-                  onValueChange={(value) => setFormData({ ...formData, location: value })}
+                  onValueChange={(val) => setFormData({...formData, location: val})}
                 >
-                  <SelectTrigger className="border-gray-200 focus:ring-[#C19A6B]">
+                  <SelectTrigger>
                     <SelectValue placeholder="Select location" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="studio">Our Studio (Airport Road)</SelectItem>
-                    <SelectItem value="outdoor">Outdoor / On-Site</SelectItem>
-                    <SelectItem value="undecided">Undecided</SelectItem>
+                    <SelectItem value="studio">Our Studio</SelectItem>
+                    <SelectItem value="outdoor">Outdoor Location</SelectItem>
+                    <SelectItem value="your-location">Your Location</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-
-              <div className="md:col-span-2 space-y-2">
-                <Label htmlFor="message" className="text-[#C19A6B]">Tell us about your vision</Label>
+              <div className="md:col-span-2 text-[#C19A6B] space-y-2">
+                <Label htmlFor="message">Tell us about your vision</Label>
                 <Textarea
                   id="message"
                   placeholder="Share any details about what you're looking for..."
-                  className="border-gray-200 focus:border-[#C19A6B] focus:ring-[#C19A6B]"
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   rows={4}
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Booking Summary & Action */}
+          {/* Summary Box - OUTSIDE GRID */}
           {selectedType && selectedDate && selectedTime && (
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-12 p-8 bg-[#C19A6B] text-white rounded-lg shadow-xl"
+              className="mt-8 p-6 bg-[#C19A6B] text-white"
             >
-              <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div>
-                  <h3 className="font-serif text-2xl mb-2">Ready to Book?</h3>
-                  <div className="text-white/90 font-light space-y-1">
-                    <p><strong>Service:</strong> {sessionTypes.find(t => t.id === selectedType)?.name}</p>
-                    <p><strong>When:</strong> {format(selectedDate, 'PPPP')} at {selectedTime}</p>
-                    <p><strong>Where:</strong> {formData.location ? (formData.location === 'studio' ? 'Our Studio' : 'Outdoor/On-Site') : 'Not selected'}</p>
-                  </div>
-                </div>
-
-                <button 
-                  onClick={handleBooking}
-                  disabled={loading}
-                  className="w-full md:w-auto px-8 py-4 bg-white text-[#C19A6B] text-sm tracking-widest font-bold hover:bg-neutral-100 transition-colors shadow-lg disabled:opacity-70 disabled:cursor-not-allowed rounded"
-                >
-                  {loading ? "PROCESSING..." : "CONFIRM BOOKING"}
-                </button>
+              <h3 className="font-serif text-lg mb-4">Booking Summary</h3>
+              <div className="text-sm space-y-2 opacity-80 font-light">
+                <p>Service: {sessionTypes.find(t => t.id === selectedType)?.name}</p>
+                <p>Date: {format(selectedDate, 'PPP')}</p>
+                <p>Time: {selectedTime}</p>
               </div>
+              <button 
+                onClick={handleBooking}
+                disabled={loading}
+                className="w-full cursor-pointer mt-6 py-3 bg-white text-[#C19A6B] text-xs tracking-widest font-bold hover:bg-gray-200 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? "PROCESSING..." : "CONFIRM BOOKING"}
+              </button>
             </motion.div>
           )}
         </div>
       </section>
-
       <footer className="bg-[#C19A6B]  text-black py-20 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">

@@ -49,7 +49,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden rounded-sm"
+            className="relative w-full h-dvh md:h-[80vh] overflow-hidden rounded-sm"
           >
              <Image 
                src="/img/about1.png"

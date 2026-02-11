@@ -2,8 +2,43 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+# Open Shore Studios 📸
 
+A modern, full-stack photography booking platform built for **Open Shore Studios**. This application enables clients to view portfolios, book sessions, and make secure payments online.
+
+![Project Status](https://img.shields.io/badge/status-live-success)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+## 🌟 Key Features
+
+* **Responsive Design:** Fully optimized for mobile (iPhone 14 Pro Max tested) and desktop.
+* **Booking System:** Interactive calendar and time slot selection.
+* **Dynamic Pricing:** Automatically calculates costs for Portraits vs. Weddings.
+* **Secure Payments:** Integrated **Paystack** for seamless Naira transactions in Nigeria.
+* **Real-time Database:** Stores all booking data securely in **Supabase**.
+* **Email Notifications:** Automated confirmation emails sent via **Resend**.
+* **Commercial Inquiries:** Special workflow for custom commercial quotes (no immediate payment required).
+
+## 🛠️ Tech Stack
+
+* **Framework:** [Next.js 14/15](https://nextjs.org/) (App Router)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [Framer Motion](https://www.framer.com/motion/) (Animations)
+* **Database:** [Supabase](https://supabase.com/) (PostgreSQL)
+* **Payments:** [Paystack](https://paystack.com/) (React Paystack)
+* **Emails:** [Resend](https://resend.com/)
+* **Icons:** [Lucide React](https://lucide.dev/)
+* **Deployment:** [Vercel](https://vercel.com/)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally on your machine.
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/your-username/open-shore-studios.git](https://github.com/your-username/open-shore-studios.git)
+cd open-shore-studios
 ```bash
 npm run dev
 # or
@@ -34,3 +69,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE.md file for details.

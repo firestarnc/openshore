@@ -99,8 +99,20 @@ export default function BookingPage() {
       alert('Booking request received! We sent a confirmation to your email.');
       // Optional: Reset form or redirect
       // window.location.href = '/';
-      // REFRESH THE PAGE
-      window.location.reload();
+     // OPTION B: Soft Reset (Instant & Smoother on Mobile)
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            location: "",
+            message: "",
+          });
+          setSelectedType("");
+          setSelectedDate(new Date());
+          setSelectedTime("");
+
+          // Scroll back to top smoothly so they see the form is fresh
+          window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (error: any) {
       console.error('Error saving booking:', error);

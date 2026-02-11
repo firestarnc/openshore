@@ -99,6 +99,8 @@ export default function BookingPage() {
       alert('Booking request received! We sent a confirmation to your email.');
       // Optional: Reset form or redirect
       // window.location.href = '/';
+      // REFRESH THE PAGE
+      window.location.reload();
 
     } catch (error: any) {
       console.error('Error saving booking:', error);

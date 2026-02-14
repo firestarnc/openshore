@@ -58,7 +58,7 @@ export default function RentCameraPage() {
                 </div>
                 <div className="shrink-0">
                     <a 
-                        href="https://wa.me/2347066446441?text=Hello, I want to verify my identity for a rental..." 
+                        href="https://wa.me/2347064426441?text=Hello, I want to verify my identity for a rental..." 
                         target="_blank" 
                         className="border-2 border-[#C19A6B] text-[#C19A6B] px-6 py-3 rounded text-xs font-bold tracking-widest hover:bg-[#C19A6B] hover:text-white transition-colors"
                     >
@@ -117,7 +117,7 @@ export default function RentCameraPage() {
 
                                 {/* 'mt-auto' pushes this button to the bottom, aligning all buttons in the row */}
                                 <a 
-                                    href={`https://wa.me/2347066446441?text=Hello, I would like to rent the ${item.name} for...`}
+                                    href={`https://wa.me/2347064426441?text=Hello, I would like to rent the ${item.name} for...`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="mt-auto block w-full py-3 border border-[#C19A6B] text-[#C19A6B] text-center text-xs font-bold tracking-widest rounded hover:bg-[#C19A6B] hover:text-white transition-all"
@@ -147,7 +147,7 @@ export default function RentCameraPage() {
             </div>
             <div className="shrink-0">
                 <a 
-                href="https://wa.me/2347066446441?text=Hi, I have camera gear I would like to list on Open Shore Studios..."
+                href="https://wa.me/2347064426441?text=Hi, I have camera gear I would like to list on Open Shore Studios..."
                 target="_blank" 
                 className="bg-[#C19A6B] text-white px-8 py-4 rounded text-xs font-bold tracking-widest hover:bg-[#a68257] transition-all flex items-center gap-2 shadow-lg hover:shadow-[#C19A6B]/20"
                 >
@@ -181,7 +181,7 @@ export default function RentCameraPage() {
               <h4 className="text-sm font-bold tracking-widest mb-6">CONTACT</h4>
               <ul className="space-y-4 text-black font-light text-sm">
                 <li><a href="mailto:contact@openshorestudios.com" className="hover:text-white/70">contact@openshorestudios.com</a></li>
-                <li><a href="tel:+2347066446441" className="hover:text-white/70">+234 (706) 644-6441</a></li>
+                <li><a href="tel:+2347064426441" className="hover:text-white/70">+234 (706) 442-6441</a></li>
                 <li><span className="opacity-70">52b, Airport road Benin city</span></li>
               </ul>
             </div>

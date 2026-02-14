@@ -134,7 +134,7 @@ export default function PricelistPage() {
                     block w-full py-3 text-center text-xs font-bold tracking-widest rounded transition-colors
                     ${pkg.isDark 
                       ? 'bg-[#C19A6B] text-white hover:bg-[#a68257]' 
-                      : 'bg-black text-white hover:bg-[#C19A6B]'
+                      : 'bg-[#C19A6B] text-white hover:bg-[#C19A6B]'
                     }
                   `}
                 >

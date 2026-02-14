@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 // Configure the font
 const ebGaramond = EB_Garamond({
@@ -17,10 +18,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://openshorestudios.com'),
-  title: "Open Shore | Professional Photography & Camera Rentals",
-  description: "Premier photo studio in Lagos offering camera rentals, portrait sessions, and wedding photography.",
+  title: "Open Shore Studios | Professional Photography & Camera Rentals",
+  keywords: ["Studio Rental Benin City", "Camera Rental Benin", "Photography Studio", "Indoor Studio", "Gear Rental", "Open Shore Studios", "openshore studios", "open shore studios"],
+  description: "Premier photo studio in Benin City and equipment rental marketplace. Rent professional cameras (Sony, Canon) or book our creative studio space.",
   icons: {
     icon: "/logo.svg", // Shows your logo in the browser tab
+  },
+  openGraph: {
+    title: "Open Shore Studios | Creative Space & Gear Rental",
+    description: "Strictly indoor professional studio. Rent the space or rent the gear.",
+    url: "https://openshorestudios.com",
+    siteName: "Open Shore Studios",
+    locale: "en_NG",
+    type: "website",
   },
 };
 
@@ -35,6 +45,8 @@ export default function RootLayout({
         className={`${ebGaramond.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* 2. Add this Script tag here */}
+        <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
       </body>
     </html>
   );

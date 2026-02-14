@@ -6,50 +6,67 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, name, email, phone, service, date, time, message } = body;
+    const { name, email, phone, service, date, time, message } = body;
 
-    // 1. Email to the CLIENT (The Confirmation)
-    const clientEmail = await resend.emails.send({
-      from: 'Open Shore <bookings@openshorestudios.com>', // Make sure this domain is verified!
-      to: [email], // Sends to the user
-      subject: `Booking Confirmed: ${service} with Open Shore`,
+    // 1. Email to STUDIO OWNER (You)
+    // Sending to your personal Gmail as requested in the old code
+    const adminEmail = await resend.emails.send({
+      from: 'Open Shore System <bookings@openshorestudios.com>', 
+      to: ['openshore01@gmail.com'], // <--- Restored your working email
+      subject: `NEW STUDIO BOOKING: ${name}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #C19A6B; font-family: serif;">Booking Confirmed</h1>
-          <p>Hi ${name},</p>
-          <p>Thank you for choosing Open Shore. Your session has been officially booked.</p>
+        <h1>New Studio Rental Confirmed!</h1>
+        <p><strong>Client:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <hr />
+        <p><strong>Package:</strong> ${service}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Time:</strong> ${time}</p>
+        <p><strong>Location:</strong> Open Shore Studios (Indoor)</p>
+        <hr />
+        <p><strong>Notes:</strong> ${message}</p>
+      `,
+    });
+
+    // 2. Email to CLIENT (Receipt)
+    // Sending from your verified domain
+    const clientEmail = await resend.emails.send({
+      from: 'Open Shore Studios <bookings@openshorestudios.com>', 
+      to: [email],
+      subject: 'Booking Confirmed - Open Shore Studios',
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          <h1 style="color: #C19A6B; text-align: center;">Booking Confirmed</h1>
+          <p>Hello ${name},</p>
+          <p>Thank you for choosing Open Shore Studios. Your studio session has been successfully booked.</p>
           
-          <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Service:</strong> ${service}</p>
+          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #C19A6B;">Session Details</h3>
+            <p><strong>Package:</strong> ${service}</p>
             <p><strong>Date:</strong> ${date}</p>
             <p><strong>Time:</strong> ${time}</p>
-            <p><strong>Location:</strong> 52b, Airport Road, Benin City</p>
+            <p><strong>Address:</strong> 52b, Airport road, Benin city</p>
           </div>
 
-          <p>If you need to reschedule, please reply to this email or call us at +234 (706) 644-6442.</p>
-          <p>See you soon,<br/>The Open Shore Team</p>
+          <div style="border-left: 4px solid #C19A6B; padding-left: 15px; margin: 20px 0; color: #555;">
+            <strong>Studio Guidelines:</strong><br/>
+            Please arrive 10 minutes before your scheduled time. 
+            <br/>Note: This booking is strictly for <strong>Studio Photography</strong> only.
+          </div>
+
+          <p>If you have any questions or need to reschedule, please contact us at <a href="tel:+2347066446441" style="color: #C19A6B;">+234 (706) 644-6441</a>.</p>
+          
+          <p>Warm regards,<br/>The Open Shore Team</p>
         </div>
       `,
     });
 
-    // 2. Email to ADMIN (Notification for you)
-    const adminEmail = await resend.emails.send({
-      from: 'Open Shore System <system@openshorestudios.com>',
-      to: ['openshore01@gmail.com'], // <--- PUT YOUR PERSONAL EMAIL HERE
-      subject: `New Booking: ${name} - ${date}`,
-      html: `
-        <h2>New Booking Received</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Date/Time:</strong> ${date} at ${time}</p>
-        <p><strong>Notes:</strong> ${message || 'None'}</p>
-      `,
-    });
-
+    // Return success for both emails (matching your old code style)
     return NextResponse.json({ success: true, clientEmail, adminEmail });
+
   } catch (error) {
+    console.error("Email Error:", error);
     return NextResponse.json({ error }, { status: 500 });
   }
 }

@@ -66,7 +66,8 @@ export default function Hero() {
           transition={{ delay: 0.9 }}
           className="text-lg md:text-xl font-light text-white/90 mb-10 max-w-2xl mx-auto"
         >
-          We create timeless photographs that tell your unique story. From intimate portraits to grand celebrations, every moment deserves to be beautifully preserved.
+          We let you create timeless unique story. 
+          Equipped with industry-standard lighting and infinite creative possibilities.
         </motion.p>
 
         <motion.div 

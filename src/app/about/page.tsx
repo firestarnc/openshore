@@ -4,6 +4,8 @@ import Header from "@/components/header";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Camera, Layers, Zap, Star } from "lucide-react";
+
 
 
 // Animation variants for staggered revealing
@@ -35,7 +37,7 @@ export default function AboutPage() {
             className="mb-12"
           >
             <motion.span variants={itemVariants} className="text-xs font-bold tracking-[0.2em] text-[#C19A6B] uppercase mb-4 block">
-              Est. 2018
+              Est. 2025
             </motion.span>
             <motion.h1 
               variants={itemVariants}
@@ -68,34 +70,62 @@ export default function AboutPage() {
       <section className="py-24 px-6 bg-neutral-50">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           
-          {/* Text Content */}
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            <motion.span variants={itemVariants} className="uppercase tracking-widest text-xs font-bold text-[#C19A6B] mb-6 block">
-              OUR PHILOSOPHY
-            </motion.span>
-            <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-serif mb-8 leading-tight">
-              Capturing the <span className="italic text-[#C19A6B]">Unseen</span> Moments
-            </motion.h2>
-            <motion.div variants={itemVariants} className="space-y-6 text-gray-600 font-light text-lg leading-relaxed">
-              <p>
-                Open Shore began with a simple mission: to document the world not just as it looks, but as it feels. We believe that every shutter click is an opportunity to freeze a moment of genuine emotion.
-              </p>
-              <p>
-                Whether it’s the quiet anticipation before a wedding or the bold energy of a commercial brand, we bring the same level of artistry and intention to every frame. We don't just take photos; we craft visual legacies.
-              </p>
+          {/* Left Column: The Hook */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="md:col-span-5 sticky top-24"
+            >
+              <span className="text-[#C19A6B] text-xs font-bold tracking-[0.2em] uppercase block mb-6">
+                The Origin
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif text-black leading-tight mb-8">
+                From a Camera Bag to <br/>
+                <span className="italic text-[#C19A6B]">Benin City’s Hub.</span>
+              </h2>
+              <div className="h-1 w-20 bg-[#C19A6B]/30" />
             </motion.div>
 
-            {/* Signature / Decorative Element */}
-            <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-[#C19A6B]/30">
-              <p className="font-serif text-2xl text-[#C19A6B]">The Open Shore Team</p>
-            </motion.div>
-          </motion.div>
+            {/* Right Column: The Story Text */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="md:col-span-7 md:pl-12 border-l border-gray-100"
+            >
+              <p className="text-gray-600 text-lg font-light leading-relaxed mb-8 first-letter:text-5xl first-letter:font-serif first-letter:text-[#C19A6B] first-letter:mr-3 first-letter:float-left">
+                Open Shore Studios didn't start as a facility; it started as a frustration.
+                Years ago, we realized that creatives in Benin City were limited—not by their talent, but by their environment.
+              </p>
+              
+              <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
+                We saw photographers struggling with unpredictable weather. We saw videographers compromising on their vision because they couldn't find a quiet, controlled space. We saw artists with incredible ideas but no access to the high-end gear needed to execute them.
+              </p>
 
+              <div className="bg-[#C19A6B]/5 p-8 rounded-lg border-l-4 border-[#C19A6B] my-10">
+                <h3 className="text-2xl font-serif text-black mb-3">We decided to build the solution.</h3>
+                <p className="text-gray-700 italic">
+                  "A sanctuary where the chaos of the outside world is silenced, and the artist constructs their own reality."
+                </p>
+              </div>
+
+              <p className="text-gray-600 text-lg font-light leading-relaxed">
+                That is why we transitioned to a dedicated <strong>Indoor Facility</strong>. Today, we are more than just a studio. With our new <strong>Gear Marketplace</strong>, we are democratizing access to professional equipment, ensuring that no creative in our city is ever held back by a lack of tools.
+              </p>
+              
+              <div className="mt-12 pt-12 border-t border-[#C19A6B]/30 flex items-center gap-4">
+                 <div className="text-sm font-bold tracking-widest text-[#C19A6B]">
+                    Welcome to Open Shore
+                 </div>
+                 <div className="h-px bg-[#C19A6B] w-12" />
+              </div>
+            </motion.div>
+
+        
+         
           {/* Stats Grid */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -106,61 +136,23 @@ export default function AboutPage() {
           >
              {/* Stat Card 1 */}
              <div className="bg-white p-10 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center aspect-square">
-                <span className="text-5xl font-serif text-[#C19A6B] mb-2">150+</span>
-                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-gray-400">Weddings Captured</span>
+                <span className="text-5xl font-serif text-[#C19A6B] mb-2">200+</span>
+                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-gray-400">Stories Captured</span>
              </div>
              {/* Stat Card 2 */}
              <div className="bg-[#C19A6B] p-10 flex flex-col justify-center items-center text-center aspect-square text-white">
-                <span className="text-5xl font-serif mb-2">12</span>
-                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold opacity-80">Global Awards</span>
+                <span className="text-5xl font-serif mb-2">100%</span>
+                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold opacity-80">Passion</span>
              </div>
              {/* Stat Card 3 */}
              <div className="bg-white p-10 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center aspect-square">
-                <span className="text-5xl font-serif text-[#C19A6B] mb-2">8k</span>
+                <span className="text-5xl font-serif text-[#C19A6B] mb-2">1k</span>
                 <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-gray-400">Happy Clients</span>
-             </div>
-             {/* Stat Card 4 */}
-             <div className="bg-white p-10 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center aspect-square">
-                <span className="text-5xl font-serif text-[#C19A6B] mb-2">100%</span>
-                <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-gray-400">Passion</span>
              </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Team / Vision Section */}
-      <section className="py-24 px-6">
-        <div className="container mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="uppercase tracking-widest text-xs font-bold text-[#C19A6B] mb-4 block">THE VISIONARIES</span>
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Meet the Creators</h2>
-            <p className="text-gray-500 font-light">
-              We are a collective of photographers, filmmakers, and storytellers obsessed with light, composition, and the perfect moment.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="group cursor-pointer">
-                <div className="relative overflow-hidden aspect-3/4 mb-6 bg-gray-100">
-                  <Image 
-                    src={`https://images.unsplash.com/photo-${item === 1 ? '1534528741775-53994a69daeb' : item === 2 ? '1507003211169-0a1dd7228f2d' : '1500917293891-ef795e70e1f6'}?auto=format&fit=crop&q=80&w=800`}
-                    alt="Team Member"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                <h3 className="text-xl font-serif">
-                  {item === 1 ? 'Sarah Jenkins' : item === 2 ? 'David Oyelowo' : 'Elena Rodriguez'}
-                </h3>
-                <p className="text-[#C19A6B] text-xs tracking-widest uppercase mt-1">
-                  {item === 1 ? 'Lead Photographer' : item === 2 ? 'Creative Director' : 'Cinematographer'}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Call to Action */}
       <section className="py-24 bg-[#C19A6B] text-white text-center px-6">
@@ -176,15 +168,50 @@ export default function AboutPage() {
             >
               BOOK A SESSION
             </Link>
-            <Link 
-              href="/rent-camera" 
-              className="border border-white text-white px-8 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-[#C19A6B] transition-colors"
-            >
-              RENT GEAR
-            </Link>
+            <div className="container mx-auto max-w-6xl">
+          <div className="bg-[#C19A6B] rounded-2xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden">
+            
+            {/* Decorative Circle */}
+            <div className="absolute -top-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            
+            <div className="relative z-10 max-w-lg text-white">
+              <div className="flex items-center gap-3 mb-4">
+                 <Camera className="w-6 h-6" />
+                 <span className="text-xs font-bold tracking-widest uppercase">Equipment Rental</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-serif mb-6">Don't have the right gear?</h2>
+              <p className="text-white/80 font-light mb-8">
+                We rent out industry-standard cameras, lenses, and lighting. 
+                Already own gear? You can also list your equipment on our platform to earn extra income.
+              </p>
+              <div className="flex gap-4">
+                  <Link 
+                    href="/rent-camera" 
+                    className="bg-white text-[#C19A6B] px-8 py-3 rounded text-xs font-bold tracking-widest hover:bg-black hover:text-white transition-all"
+                  >
+                    BROWSE GEAR
+                  </Link>
+              </div>
+            </div>
+
+            {/* Placeholder Visual for Gear */}
+            <div className="relative z-10 grid grid-cols-2 gap-4 opacity-90">
+                <div className="bg-black/20 p-6 rounded-lg backdrop-blur-sm">
+                    <span className="block text-2xl font-bold text-white mb-1">Sony</span>
+                    <span className="text-xs text-white/70">Alpha Series</span>
+                </div>
+                <div className="bg-black/20 p-6 rounded-lg backdrop-blur-sm mt-8">
+                    <span className="block text-2xl font-bold text-white mb-1">Godox</span>
+                    <span className="text-xs text-white/70">Professional Lighting</span>
+                </div>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
       </section>
+
+       
 
      
     </main>

@@ -55,7 +55,7 @@ export async function POST(request: Request) {
             <br/>Note: This booking is strictly for <strong>Studio Photography</strong> only.
           </div>
 
-          <p>If you have any questions or need to reschedule, please contact us at <a href="tel:+2347066446441" style="color: #C19A6B;">+234 (706) 644-6441</a>.</p>
+          <p>If you have any questions or need to reschedule, please contact us at <a href="tel:+2347064426441" style="color: #C19A6B;">+234 (706) 644-6441</a>.</p>
           
           <p>Warm regards,<br/>The Open Shore Team</p>
         </div>

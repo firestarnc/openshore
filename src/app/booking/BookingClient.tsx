@@ -452,7 +452,7 @@ export default function BookingClient() {
               <h4 className="text-sm font-bold tracking-widest mb-6">CONTACT</h4>
               <ul className="space-y-4 text-black font-light text-sm">
                 <li><a href="mailto:contact@openshorestudios.com" className="hover:text-white/70">contact@openshorestudios.com</a></li>
-                <li><a href="tel:+2347066446441" className="hover:text-white/70">+234 (706) 644-6441</a></li>
+                <li><a href="tel:+2347064426441" className="hover:text-white/70">+234 (706) 442-6441</a></li>
                 <li><span className="opacity-70">52b, Airport road Benin city</span></li>
               </ul>
             </div>

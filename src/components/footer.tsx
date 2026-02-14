@@ -77,10 +77,10 @@ export default function Footer() {
                 {/* Phone Link (Usually better to stay in same tab to trigger call) */}
                 <li>
                   <a 
-                    href="tel:+2347066446441" 
+                    href="tel:+2347064426441" 
                     className="hover:text-white/70 transition-colors"
                   >
-                    +234 (706) 644-6441
+                    +234 (706) 442-6441
                   </a>
                 </li>
 

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Open Shore Studios | Creative Space & Gear Rental",
-    description: "Strictly indoor professional studio. Rent the space or rent the gear.",
+    description: "Pofessional studio. Rent the space or rent the gear.",
     url: "https://openshorestudios.com",
     siteName: "Open Shore Studios",
     locale: "en_NG",

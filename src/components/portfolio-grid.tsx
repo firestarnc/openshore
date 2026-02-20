@@ -15,11 +15,12 @@ const portfolioItems = [
   { id: 5, category: "Portrait", src: "/img/hero15.png", title: "Golden Hour" },
   { id: 6, category: "Wedding", src: "/img/hero16.png", title: "First Dance" },
   { id: 7, category: "Commercial", src: "/img/hero17.png", title: "Growing Love" },
+  { id: 12, category: "Commercial", src: "/img/hero022.png", title: "Golden Year" },
   { id: 8, category: "Editorial", src: "/img/hero18.png", title: "Cloud Corner" },
   { id: 9, category: "Portrait", src: "/img/hero19.png", title: "Crystal Light" },
   { id: 10, category: "Wedding", src: "/img/hero020.png", title: "Timeless Affection" },
   { id: 11, category: "Wedding", src: "/img/hero021.png", title: "Intimate Gaze" },
-  { id: 12, category: "Commercial", src: "/img/hero022.png", title: "Golden Year" },
+  
 ];
 
 export default function PortfolioGrid() {

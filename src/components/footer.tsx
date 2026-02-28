@@ -103,7 +103,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-black font-light">
-            <p>&copy; {new Date().getFullYear()} Open Shore Studio. All rights reserved.</p>
+            
             <div className="flex gap-6 mt-4 md:mt-0">
                 <a 
                   href="https://www.instagram.com/open.shore/" 
@@ -116,6 +116,14 @@ export default function Footer() {
               <Link href="#">Twitter</Link>
               <Link href="#">LinkedIn</Link>
             </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col py-6 items-center justify-center space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+          <p>&copy; {new Date().getFullYear()} Open Shore Studio. All rights reserved.</p>
+          <div className="flex space-x-4">
+            <a href="/privacy" className="hover:underline">Privacy Policy</a>
+            <a href="/terms" className="hover:underline">Terms of Service</a>
           </div>
         </div>
       </footer>

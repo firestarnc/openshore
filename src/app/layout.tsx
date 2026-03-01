@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { EB_Garamond, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // Configure the font
 const ebGaramond = EB_Garamond({

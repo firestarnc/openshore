@@ -66,6 +66,7 @@ export default function RootLayout({
         
         {/* 2. Paystack Script */}
         <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
+        <SpeedInsights />
       </body>
     </html>
   );

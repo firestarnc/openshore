@@ -10,7 +10,6 @@ const ebGaramond = EB_Garamond({
   variable: '--font-eb-garamond', // Define a CSS variable name
 });
 
-
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -44,8 +43,27 @@ export default function RootLayout({
       <body
         className={`${ebGaramond.variable} ${geistMono.variable} antialiased`}
       >
+        {/* 1. Google Ads Tag (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17965129527"
+        />
+        <Script
+          id="google-ads-tag"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17965129527');
+            `,
+          }}
+        />
+
         {children}
-        {/* 2. Add this Script tag here */}
+        
+        {/* 2. Paystack Script */}
         <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
       </body>
     </html>

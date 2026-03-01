@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { EB_Garamond, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
 // Configure the font
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
@@ -66,7 +64,6 @@ export default function RootLayout({
         
         {/* 2. Paystack Script */}
         <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
-        <SpeedInsights />
       </body>
     </html>
   );

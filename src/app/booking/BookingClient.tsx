@@ -428,9 +428,12 @@ export default function BookingClient() {
         </div>
       </section>
 
-      <footer className="bg-[#C19A6B] text-black py-20 border-t border-white/10">
+       {/* Footer */}
+      <footer className="bg-[#C19A6B]  text-black py-20 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            
+            {/* Brand */}
             <div className="md:col-span-2">
               <Link href="/" className="text-3xl font-serif font-bold tracking-tighter block mb-6">
                 Open Shore
@@ -439,6 +442,8 @@ export default function BookingClient() {
                 Capturing life's most beautiful moments with artistry and intention.
               </p>
             </div>
+
+            {/* Links */}
             <div>
               <h4 className="text-sm font-bold tracking-widest mb-6">EXPLORE</h4>
               <ul className="space-y-4 text-black font-light text-sm">
@@ -448,17 +453,74 @@ export default function BookingClient() {
                 <li><Link href="/rent-camera" className="hover:text-white transition-colors">Rent a Camera</Link></li>
               </ul>
             </div>
+
+            {/* Contact Info */}
             <div>
               <h4 className="text-sm font-bold tracking-widest mb-6">CONTACT</h4>
               <ul className="space-y-4 text-black font-light text-sm">
-                <li><a href="mailto:contact@openshorestudios.com" className="hover:text-white/70">contact@openshorestudios.com</a></li>
-                <li><a href="tel:+2347064426441" className="hover:text-white/70">+234 (706) 442-6441</a></li>
-                <li><span className="opacity-70">52b, Airport road Benin city</span></li>
+                
+                {/* Email Link */}
+                <li>
+                  <a 
+                    href="mailto:contact@openshorestudios.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    contact@openshorestudios.com
+                  </a>
+                </li>
+
+                {/* Phone Link (Usually better to stay in same tab to trigger call) */}
+                <li>
+                  <a 
+                    href="tel:+2347064426441" 
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    +234 (706) 442-6441
+                  </a>
+                </li>
+
+                {/* Maps Link */}
+                <li>
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=52b+Airport+road+Benin+city" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    52b, Airport road Benin city
+                  </a>
+                </li>
+
               </ul>
             </div>
+
           </div>
-          <div className="pt-8 border-t border-white/10 flex justify-between items-center text-xs text-black font-light">
-            <p>© {new Date().getFullYear()} Open Shore Studio. All rights reserved.</p>
+
+          {/* Copyright */}
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-black font-light">
+            
+            <div className="flex gap-6 mt-4 md:mt-0">
+                <a 
+                  href="https://www.instagram.com/open.shore/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C19A6B] transition-colors"
+                >
+                  Instagram
+                </a>
+              <Link href="#">Twitter</Link>
+              <Link href="#">LinkedIn</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col py-6 items-center justify-center space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+          <p>&copy; {new Date().getFullYear()} Open Shore Studio. All rights reserved.</p>
+          <div className="flex space-x-4">
+            <a href="/privacy" className="hover:underline">Privacy Policy</a>
+            <a href="/terms" className="hover:underline">Terms of Service</a>
           </div>
         </div>
       </footer>

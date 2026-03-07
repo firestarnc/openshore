@@ -21,7 +21,7 @@ const packages = [
     icon: <Users className="w-5 h-5" />,
     features: ["1 Section of choice", "Maximum 4 People", "No heavy equipment showing"],
     options: [
-      { id: 'basic-30', duration: '30 Mins', price: 20000, label: '30 Mins' },
+      { id: 'basic-30', duration: '30 Mins', price: 100, label: 'TESTING (N100)' },
       { id: 'basic-60', duration: '1 Hour', price: 35000, label: '1 Hour' },
     ]
   },

@@ -14,7 +14,7 @@ export default function SuccessPage() {
         </p>
         <Link 
           href="/"
-          className="bg-[#1a1a1a] text-white px-8 py-3 rounded text-sm tracking-widest font-bold hover:bg-[#C19A6B] transition-colors"
+          className="bg-[#C19A6B] text-white px-8 py-3 rounded text-sm tracking-widest font-bold hover:bg-[#C19A6B]/50 transition-colors"
         >
           RETURN HOME
         </Link>

@@ -22,8 +22,8 @@ const packages = [
     icon: <Users className="w-5 h-5" />,
     features: ["1 Section of choice", "Maximum 4 People", "No heavy equipment showing"],
     options: [
-      { id: 'basic-30', duration: '30 Mins', price: 100, label: 'TESTING (N100)' },
-      { id: 'basic-60', duration: '1 Hour', price: 35000, label: '1 Hour' },
+      { id: 'basic-30', duration: '30 Mins', price: 20400, label: '30 Mins' },
+      { id: 'basic-60', duration: '1 Hour', price: 35700, label: '1 Hour' },
     ]
   },
   { 
@@ -32,8 +32,8 @@ const packages = [
     icon: <Users className="w-5 h-5" />,
     features: ["3 Sections of choice", "Maximum 6 People", "No heavy equipment showing"],
     options: [
-      { id: 'std-1', duration: '1 Hour', price: 60000, label: '1 Hour' },
-      { id: 'std-2', duration: '2 Hours', price: 110000, label: '2 Hours' },
+      { id: 'std-1', duration: '1 Hour', price: 61250, label: '1 Hour' },
+      { id: 'std-2', duration: '2 Hours', price: 112200, label: '2 Hours' },
     ]
   },
   { 
@@ -42,8 +42,8 @@ const packages = [
     icon: <Users className="w-5 h-5" />,
     features: ["Full Access", "Maximum 10 People", "No heavy equipment showing"],
     options: [
-      { id: 'prem-1', duration: '1 Hour', price: 85000, label: '1 Hour' },
-      { id: 'prem-2', duration: '2 Hours', price: 150000, label: '2 Hours' },
+      { id: 'prem-1', duration: '1 Hour', price: 86700, label: '1 Hour' },
+      { id: 'prem-2', duration: '2 Hours', price: 153000, label: '2 Hours' },
     ]
   },
   { 
@@ -52,8 +52,8 @@ const packages = [
     icon: <Video className="w-5 h-5" />,
     features: ["Full Studio Access", "Continuous Lighting", "Green Screen Access"],
     options: [
-      { id: 'vid-half', duration: 'Half Day (5 Hours)', price: 250000, label: 'Half Day' },
-      { id: 'vid-full', duration: 'Full Day (10 Hours)', price: 400000, label: 'Full Day' },
+      { id: 'vid-half', duration: 'Half Day (5 Hours)', price: 255000, label: 'Half Day' },
+      { id: 'vid-full', duration: 'Full Day (10 Hours)', price: 408000, label: 'Full Day' },
     ]
   },
 ];

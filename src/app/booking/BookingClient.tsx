@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Check, Users, Video, Clock, ArrowRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 // --- CONFIGURATION: New Package Structure ---
@@ -64,11 +65,34 @@ const timeSlots = [
 ];
 
 export default function BookingClient() {
+  const router = useRouter(); // <-- ADD THIS LINE HERE
   const [selectedPackageId, setSelectedPackageId] = useState('');
   const [selectedOptionId, setSelectedOptionId] = useState(''); 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState('');
   const [loading, setLoading] = useState(false);
+  // --- ADD THIS RIGHT BELOW YOUR STATE VARIABLES ---
+  const getAvailableTimes = () => {
+    if (!selectedDate) return timeSlots;
+
+    // JavaScript Date object: 0 is Sunday, 1 is Monday, etc.
+    const isSunday = selectedDate.getDay() === 0;
+
+    if (isSunday) {
+      // Filter out the early morning slots for Sundays
+      return timeSlots.filter(time => 
+        time !== "09:00 AM" && 
+        time !== "10:00 AM" && 
+        time !== "11:00 AM"
+      );
+    }
+
+    // Return all normal slots for Monday - Saturday
+    return timeSlots;
+  };
+
+  const availableTimes = getAvailableTimes();
+  // --------------------------------------------------
 
   const [formData, setFormData] = useState({
     name: "",
@@ -306,7 +330,10 @@ export default function BookingClient() {
                     <DayPicker
                     mode="single"
                     selected={selectedDate}
-                    onSelect={setSelectedDate}
+                    onSelect={(date) => {
+                      setSelectedDate(date);
+                      setSelectedTime(''); // Forces them to pick a valid time for the new day
+                    }}
                     disabled={{ before: new Date() }}
                     modifiersStyles={{
                         selected: { backgroundColor: '#C19A6B', color: 'white' }
@@ -318,7 +345,7 @@ export default function BookingClient() {
               <div className="space-y-4">
                 <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">03. Select Start Time</h2>
                 <div className="grid grid-cols-3 gap-2">
-                  {timeSlots.map((time) => (
+                  {availableTimes.map((time) => (
                     <button
                       key={time}
                       onClick={() => setSelectedTime(time)}

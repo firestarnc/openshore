@@ -465,8 +465,8 @@ export default function BookingClient() {
               <Link href="/" className="text-3xl font-serif font-bold tracking-tighter block mb-6">
                 Open Shore
               </Link>
-              <p className="text-black font-light max-w-xs">
-                Capturing life's most beautiful moments with artistry and intention.
+             <p className="text-black font-light max-w-xs">
+                Capturing life's most beautiful moments with artistry and intention, serving creators across Benin City — GRA, Airport Road, Uselu, Ekenwan, Ugbowo, and beyond.
               </p>
             </div>
 
@@ -537,7 +537,14 @@ export default function BookingClient() {
                 >
                   Instagram
                 </a>
-              <Link href="#">Twitter</Link>
+              <a 
+                  href="https://www.youtube.com/@open.shore" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C19A6B] transition-colors"
+                >
+                  Youtube
+                </a>
               <Link href="#">LinkedIn</Link>
             </div>
           </div>

@@ -3,7 +3,30 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { images } from '@/lib/constant';
+import Image from 'next/image';
+
+const heroImages = [
+  {
+    src: '/img/hero1.png',
+    alt: 'Professional photography studio with modern lighting setup at Open Shore Studios, Airport Road, Benin City'
+  },
+  {
+    src: '/img/hero2.png',
+    alt: 'Content creator photoshoot in minimalist white studio at Open Shore Studios, Benin City'
+  },
+  {
+    src: '/img/hero3.png',
+    alt: 'Fashion photography session with professional Godox lighting at Open Shore Studios, Benin City'
+  },
+  {
+    src: '/img/hero4.png',
+    alt: 'Commercial brand photography in spacious content studio at Open Shore Studios, Benin City'
+  },
+  {
+    src: '/img/hero5.png',
+    alt: 'Portrait photography with natural light backdrop at Open Shore Studios, Airport Road, Benin City'
+  },
+];
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
@@ -11,7 +34,7 @@ export default function Hero() {
   // Auto-rotate images every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
+      setIndex((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -22,16 +45,23 @@ export default function Hero() {
       {/* Background Image Slider */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode='wait'>
-          <motion.img
+          <motion.div
             key={index}
-            src={images[index]}
-            alt="Hero Background"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5 }}
-            className="w-full h-full object-cover brightness-[0.60]" // Darkens image so text pops
-          />
+            className="w-full h-full relative"
+          >
+            <Image
+              src={heroImages[index].src}
+              alt={heroImages[index].alt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover brightness-[0.60]"
+            />
+          </motion.div>
         </AnimatePresence>
       </div>
 
@@ -47,18 +77,15 @@ export default function Hero() {
         </motion.span>
         
         <motion.h1 
-        initial={{ opacity: 0, y: 30 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ delay: 0.7 }} 
-        className="text-5xl md:text-7xl font-serif font-regular mb-6 leading-tight"
-      > 
-        Capturing <br/> 
-        {/* Apply italic to this specific span */}
-        <span className="italic font-extralight">Light & </span> 
-        {/* Apply your custom hex color to this specific span */}
-        <span className="text-[#C19A6B]">Stories</span> 
-      </motion.h1>
-
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: 0.7 }} 
+          className="text-5xl md:text-7xl font-serif font-regular mb-6 leading-tight"
+        > 
+          Capturing <br/> 
+          <span className="italic font-extralight">Light & </span> 
+          <span className="text-[#C19A6B]">Stories</span> 
+        </motion.h1>
 
         <motion.p 
           initial={{ opacity: 0, y: 30 }}

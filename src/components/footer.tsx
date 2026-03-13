@@ -42,7 +42,7 @@ export default function Footer() {
                 Open Shore
               </Link>
               <p className="text-black font-light max-w-xs">
-                Capturing life's most beautiful moments with artistry and intention.
+                Capturing life's most beautiful moments with artistry and intention, serving creators across Benin City — GRA, Airport Road, Uselu, Ekenwan, Ugbowo, and beyond.
               </p>
             </div>
 
@@ -113,7 +113,14 @@ export default function Footer() {
                 >
                   Instagram
                 </a>
-              <Link href="#">Twitter</Link>
+              <a 
+                  href="https://www.youtube.com/@open.shore" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C19A6B] transition-colors"
+                >
+                  Youtube
+                </a>
               <Link href="#">LinkedIn</Link>
             </div>
           </div>

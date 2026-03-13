@@ -55,7 +55,7 @@ export default function AboutPage() {
          >
         <Image
           src="/img/about1.png"
-           alt="Studio Space"
+           alt="The Best Content Studio Space in Benin City"
            fill
           className="object-cover"
           priority 

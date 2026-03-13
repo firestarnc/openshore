@@ -1,16 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { images } from '@/lib/constant';
 
-// Placeholders - replace with your best portfolio shots
 const works = [
-    '/img/hero21.png',
-    '/img/hero22.png',
-    '/img/hero23.png',
-    '/img/hero24.png',
+  {
+    src: '/img/hero21.png',
+    alt: 'Professional portrait session with ring light setup at Open Shore Studios, Benin City'
+  },
+  {
+    src: '/img/hero22.png',
+    alt: 'Wedding photography with elegant studio backdrop at Open Shore Studios, Airport Road, Benin City'
+  },
+  {
+    src: '/img/hero23.png',
+    alt: 'Content creator filming with professional video lighting at Open Shore Studios, Benin City'
+  },
+  {
+    src: '/img/hero24.png',
+    alt: 'Commercial product photography on white seamless background at Open Shore Studios, Benin City'
+  },
 ];
 
 export default function FeaturedWork() {
@@ -40,19 +51,22 @@ export default function FeaturedWork() {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {works.map((src, index) => (
+          {works.map((work, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`relative overflow-hidden group cursor-pointer ${index % 2 === 0 ? 'md:mt-0' : 'md:mt-12'}`} // Staggered look
+              className={`relative overflow-hidden group cursor-pointer ${index % 2 === 0 ? 'md:mt-0' : 'md:mt-12'}`}
             >
-              <div className="aspect-3/4 overflow-hidden">
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${src})` }}
+              <div className="aspect-3/4 overflow-hidden relative">
+                <Image
+                  src={work.src}
+                  alt={work.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
             </motion.div>

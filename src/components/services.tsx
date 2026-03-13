@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const services = [
@@ -8,18 +9,21 @@ const services = [
     title: "Portrait Sessions",
     description: "Individual, couple, and family portraits that capture personality and connection.",
     image: "/img/hero11.png",
+    alt: "Professional portrait photography session with studio lighting at Open Shore Studios, Benin City",
     link: "/booking?type=portrait"
   },
   {
     title: "Wedding Photography",
     description: "Documenting your love story from engagement to celebration with artistry and care.",
     image: "/img/hero12.png",
+    alt: "Elegant wedding photography with romantic backdrop at Open Shore Studios, Airport Road, Benin City",
     link: "/booking?type=wedding"
   },
   {
     title: "Commercial Work",
     description: "Brand photography, product shoots, and corporate headshots that elevate your business.",
     image: "/img/hero14.png",
+    alt: "Commercial brand photography in professional studio setup at Open Shore Studios, Benin City",
     link: "/booking?type=commercial"
   }
 ];
@@ -72,9 +76,12 @@ export default function Services() {
               <Link href={service.link} className="group block">
                 {/* Image Container */}
                 <div className="relative overflow-hidden aspect-4/5 mb-6">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${service.image})` }}
+                  <Image
+                    src={service.image}
+                    alt={service.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                 </div>

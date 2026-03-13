@@ -12,11 +12,15 @@ const ebGaramond = EB_Garamond({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://openshorestudios.com'),
-  title: "Open Shore Studios | Professional Photography & Camera Rentals",
+  title: {
+    default: "Open Shore Studios | Professional Photography & Camera Rentals in Benin City",
+    template: "%s | Open Shore Studios",
+  },
   keywords: [
     "Studio Rental Benin City", 
     "content studio Benin City", 
@@ -35,18 +39,54 @@ export const metadata: Metadata = {
     "Ekenwan",
     "Best content studio Benin City",
     "content studio near me",
+    "photography tips Benin City",
+    "outdoor shoot locations Nigeria",
+    "Sony camera rental Benin",
+    "video production Benin City",
   ],
-  description: "Premier photo studio in Benin City and equipment rental marketplace. Rent professional cameras (Sony, Canon) or book our creative content studio space.",
+  description: "Premier photo studio in Benin City and equipment rental marketplace. Rent professional cameras (Sony, Canon) or book our creative content studio space. Expert tips and resources for creators.",
   icons: {
     icon: "/logo.svg",
+    apple: "/apple-touch-icon.png",
+  },
+  alternates: {
+    canonical: "https://openshorestudios.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // Add your Google Search Console verification
   },
   openGraph: {
     title: "Open Shore Studios | Creative Space & Gear Rental",
-    description: "Content studio on Airport Road serving creators across GRA, Uselu, and Ekenwan in Benin City.",
+    description: "Content studio on Airport Road serving creators across GRA, Uselu, and Ekenwan in Benin City. Professional photography, video production, and creator resources.",
     url: "https://openshorestudios.com",
     siteName: "Open Shore Studios",
     locale: "en_NG",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Open Shore Studios - Professional Photography Studio in Benin City",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Open Shore Studios | Photography & Camera Rentals",
+    description: "Premier photo studio and equipment rental in Benin City, Nigeria.",
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -57,6 +97,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${ebGaramond.variable} ${geistMono.variable} antialiased`}
       >
@@ -75,6 +119,33 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', 'AW-17965129527');
             `,
+          }}
+        />
+
+        {/* Organization Schema */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Open Shore Studios",
+              url: "https://openshorestudios.com",
+              logo: "https://openshorestudios.com/logo.svg",
+              sameAs: [
+                "https://www.instagram.com/open.shore/",
+                "https://www.youtube.com/@open.shore",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+2347064426441",
+                contactType: "customer service",
+                areaServed: "NG",
+                availableLanguage: "English",
+              },
+            }),
           }}
         />
 
@@ -170,6 +241,92 @@ export default function RootLayout({
           }}
         />
 
+        {/* Website Schema with SearchAction */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Open Shore Studios",
+              url: "https://openshorestudios.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://openshorestudios.com/resources?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+
+        {/* Blog/Publisher Schema for Creator Resources */}
+        <Script
+          id="blog-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              name: "Open Shore Creator Resources",
+              description: "Photography tips, video production guides, and creative insights for content creators in Benin City and Nigeria.",
+              url: "https://openshorestudios.com/resources",
+              inLanguage: "en-NG",
+              publisher: {
+                "@type": "Organization",
+                name: "Open Shore Studios",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://openshorestudios.com/logo.svg",
+                },
+              },
+              blogPost: [
+                {
+                  "@type": "BlogPosting",
+                  headline: "5 Best Locations for Outdoor Shoots in Benin City",
+                  url: "https://openshorestudios.com/resources/5-best-locations-for-outdoor-shoots-in-benin-city",
+                  datePublished: "2026-03-01",
+                  dateModified: "2026-03-13",
+                  author: {
+                    "@type": "Organization",
+                    name: "Open Shore Studios",
+                  },
+                  description: "Discover the top 5 spots for stunning outdoor photography and videography in Benin City, Nigeria.",
+                },
+                {
+                  "@type": "BlogPosting",
+                  headline: "Why We Use Sony for Cinematic Video at Open Shore",
+                  url: "https://openshorestudios.com/resources/why-we-use-sony-for-cinematic-video",
+                  datePublished: "2026-03-05",
+                  dateModified: "2026-03-13",
+                  author: {
+                    "@type": "Organization",
+                    name: "Open Shore Studios",
+                  },
+                  description: "Learn why Sony cameras are our go-to choice for professional cinematic video production.",
+                },
+                {
+                  "@type": "BlogPosting",
+                  headline: "Essential Tips for First-Time Studio Clients",
+                  url: "https://openshorestudios.com/resources/essential-tips-for-first-time-clients",
+                  datePublished: "2026-03-10",
+                  dateModified: "2026-03-13",
+                  author: {
+                    "@type": "Organization",
+                    name: "Open Shore Studios",
+                  },
+                  description: "Everything first-time clients need to know before their professional photo or video shoot.",
+                },
+              ],
+            }),
+          }}
+        />
+
         {/* Service Schema - Studio Rental */}
         <Script
           id="service-studio-schema"
@@ -233,6 +390,45 @@ export default function RootLayout({
                 ratingValue: "4.9",
                 reviewCount: "32",
               },
+            }),
+          }}
+        />
+
+        {/* BreadcrumbList Schema */}
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://openshorestudios.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Resources",
+                  item: "https://openshorestudios.com/resources",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: "Booking",
+                  item: "https://openshorestudios.com/booking",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 4,
+                  name: "Camera Rental",
+                  item: "https://openshorestudios.com/rent-camera",
+                },
+              ],
             }),
           }}
         />

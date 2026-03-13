@@ -27,7 +27,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     console.error('Sitemap Error:', error);
   }
+   /*
+  -----------------------------
+  BLOG / RESOURCES ROUTES
+  -----------------------------
+  */
 
+  const resourceRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/resources`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/resources/5-best-locations-for-outdoor-shoots-in-benin-city`,
+      lastModified: new Date("2026-03-01"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/resources/why-we-use-sony-for-cinematic-video`,
+      lastModified: new Date("2026-03-05"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/resources/essential-tips-for-first-time-clients`,
+      lastModified: new Date("2026-03-10"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+  ];
   // 2. Define your Main Pages
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -63,5 +94,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 3. Combine them
-  return [...staticRoutes, ...cameraRoutes];
+  return [...staticRoutes, ...resourceRoutes, ...cameraRoutes];
 }

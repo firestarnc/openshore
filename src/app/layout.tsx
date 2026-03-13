@@ -179,7 +179,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              serviceType: ["Photography Studio Rental", "Commercial Photography", "Content Creation Space", "Production Studio Rental"],
+              serviceType: ["Photography Studio Rental", "Content Creation Space", "Production Studio Rental"],
               name: "Content Studio Booking",
               description: "Professional photography and video studio space for content creators in Benin City.",
               provider: {
@@ -196,7 +196,7 @@ export default function RootLayout({
                   "@type": "PriceSpecification",
                   priceCurrency: "NGN",
                   price: "35000",
-                  unitText: "per hour",
+                  unitText: "hour",
                 },
                 availability: "https://schema.org/InStock",
               },

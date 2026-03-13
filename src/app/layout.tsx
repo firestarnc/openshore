@@ -195,8 +195,9 @@ export default function RootLayout({
                 priceSpecification: {
                   "@type": "PriceSpecification",
                   priceCurrency: "NGN",
-                  price: "35000",
+                  price: "35000.00",
                   unitText: "hour",
+                  unitCode: "HUR",
                 },
                 availability: "https://schema.org/InStock",
               },

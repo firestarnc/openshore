@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://openshorestudios.com'),
   title: {
-    default: "Open Shore Studios | Professional Photography & Camera Rentals in Benin City",
+    default: "Open Shore Studios | Best Content Studio in Benin City",
     template: "%s | Open Shore Studios",
   },
   keywords: [
@@ -31,7 +31,6 @@ export const metadata: Metadata = {
     "Open Shore Studios", 
     "openshore studios", 
     "open shore", 
-    "Open shore", 
     "open shore studios", 
     "GRA",
     "Airport Road",
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     "Sony camera rental Benin",
     "video production Benin City",
   ],
-  description: "Premier photo studio in Benin City and equipment rental marketplace. Rent professional cameras (Sony, Canon) or book our creative content studio space. Expert tips and resources for creators.",
+  description: "Premier content studio in Benin City and equipment rental marketplace. Rent professional cameras (Sony, Canon) or book our creative content studio space. Expert tips and resources for creators.",
   icons: {
     icon: "/logo.svg",
     apple: "/apple-touch-icon.png",
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code", // Add your Google Search Console verification
+    google: process.env.GOOGLE_SITE_VERIFICATION, // Add your Google Search Console verification
   },
   openGraph: {
     title: "Open Shore Studios | Creative Space & Gear Rental",

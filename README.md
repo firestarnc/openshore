@@ -35,6 +35,18 @@ A modern, full-stack photography booking platform built for **Open Shore Studios
 
 Follow these steps to run the project locally on your machine.
 
+## Meet The Team Setup
+
+The About page now includes a Supabase-backed team section. To populate it:
+
+1. Run the SQL in [supabase/team_members_setup.sql](supabase/team_members_setup.sql) inside the Supabase SQL editor.
+2. Create a public storage bucket named `team-images` if it is not created by the script.
+3. Upload each team photo into the `team-images` bucket using the file names referenced in the SQL seed data, or update the `image_path` values to match your uploaded names.
+4. Keep `is_active` set to `true` for profiles that should appear on the About page.
+5. Use `sort_order` to control the display order on the page.
+
+The app derives public image URLs from Supabase Storage at render time, so only the storage path is stored in the `team_members` table.
+
 ### 1. Clone the Repository
 ```bash
 git clone [https://github.com/your-username/open-shore-studios.git](https://github.com/your-username/open-shore-studios.git)

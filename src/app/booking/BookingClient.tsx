@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Header from "@/components/header";
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
@@ -71,6 +71,10 @@ export default function BookingClient() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState('');
   const [loading, setLoading] = useState(false);
+  const [unavailableTimes, setUnavailableTimes] = useState<string[]>([]);
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
+
+  const normalizeTime = (value: string) => value.trim().toUpperCase();
   // --- ADD THIS RIGHT BELOW YOUR STATE VARIABLES ---
   const getAvailableTimes = () => {
     if (!selectedDate) return timeSlots;
@@ -92,6 +96,58 @@ export default function BookingClient() {
   };
 
   const availableTimes = getAvailableTimes();
+  const unavailableTimeSet = useMemo(
+    () => new Set(unavailableTimes.map(normalizeTime)),
+    [unavailableTimes]
+  );
+
+  const isTimeUnavailable = (time: string) => unavailableTimeSet.has(normalizeTime(time));
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    const loadUnavailableTimes = async () => {
+      if (!selectedDate) {
+        setUnavailableTimes([]);
+        return;
+      }
+
+      setIsCheckingAvailability(true);
+
+      const { data, error } = await supabase
+        .from('bookings')
+        .select('booking_time, status')
+        .eq('booking_date', format(selectedDate, 'yyyy-MM-dd'))
+        .in('status', ['paid', 'pending']);
+
+      if (isCancelled) return;
+
+      if (error) {
+        console.error('Error loading unavailable times:', error);
+        setUnavailableTimes([]);
+        setIsCheckingAvailability(false);
+        return;
+      }
+
+      const booked = Array.from(
+        new Set(
+          (data ?? [])
+            .map((row) => (typeof row.booking_time === 'string' ? normalizeTime(row.booking_time) : ''))
+            .filter(Boolean)
+        )
+      );
+
+      setUnavailableTimes(booked);
+      setSelectedTime((current) => (booked.includes(normalizeTime(current)) ? '' : current));
+      setIsCheckingAvailability(false);
+    };
+
+    loadUnavailableTimes();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [selectedDate]);
   // --------------------------------------------------
 
   const [formData, setFormData] = useState({
@@ -159,7 +215,7 @@ export default function BookingClient() {
       
       if (!emailRes.ok) console.warn("Email warning:", await emailRes.text());
 
-      alert('SUCCESS! Studio Booking Confirmed.');
+   
       window.location.href = '/success';
 
     } catch (error: any) {
@@ -346,22 +402,37 @@ export default function BookingClient() {
                 <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400">03. Select Start Time</h2>
                 <div className="grid grid-cols-3 gap-2">
                   {availableTimes.map((time) => (
-                    <button
-                      key={time}
-                      onClick={() => setSelectedTime(time)}
-                      className={`
-                        py-2 px-1 text-xs border rounded transition-all font-medium
-                        ${
-                          selectedTime === time 
-                          ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md' 
-                          : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-[#C19A6B]/5'
-                        }
-                      `}
-                    >
-                      {time}
-                    </button>
+                    (() => {
+                      const unavailable = isTimeUnavailable(time);
+
+                      return (
+                        <button
+                          key={time}
+                          type="button"
+                          disabled={unavailable}
+                          onClick={() => setSelectedTime(time)}
+                          title={unavailable ? 'This time slot is unavailable' : 'Available'}
+                          className={`
+                            py-2 px-1 text-xs border rounded transition-all font-medium
+                            ${
+                              unavailable
+                                ? 'bg-gray-50 text-gray-400 border-gray-200 line-through cursor-not-allowed'
+                                : selectedTime === time
+                                  ? 'bg-[#C19A6B] text-white border-[#C19A6B] shadow-md'
+                                  : 'bg-white text-[#C19A6B] border-[#C19A6B] hover:bg-[#C19A6B]/5'
+                            }
+                          `}
+                        >
+                          {time}
+                        </button>
+                      );
+                    })()
                   ))}
                 </div>
+                <p className="text-[11px] text-gray-500">
+                  Struck-through times are already booked and unavailable.
+                  {isCheckingAvailability ? ' Checking availability...' : ''}
+                </p>
               </div>
             </div>
 

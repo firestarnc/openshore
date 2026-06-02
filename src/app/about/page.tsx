@@ -1,10 +1,11 @@
 'use client';
 
 import Header from "@/components/header";
+import TeamSection from "@/components/team-section";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Camera, Layers, Zap, Star } from "lucide-react";
+import { Camera } from "lucide-react";
 
 
 
@@ -97,18 +98,18 @@ export default function AboutPage() {
               className="md:col-span-7 md:pl-12 border-l border-gray-100"
             >
               <p className="text-gray-600 text-lg font-light leading-relaxed mb-8 first-letter:text-5xl first-letter:font-serif first-letter:text-[#C19A6B] first-letter:mr-3 first-letter:float-left">
-                Open Shore Studios didn't start as a facility; it started as a frustration.
+                Open Shore Studios didn&apos;t start as a facility; it started as a frustration.
                 Years ago, we realized that creatives in Benin City were limited—not by their talent, but by their environment.
               </p>
               
               <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
-                We saw photographers struggling with unpredictable weather. We saw videographers compromising on their vision because they couldn't find a quiet, controlled space. We saw artists with incredible ideas but no access to the high-end gear needed to execute them.
+                We saw photographers struggling with unpredictable weather. We saw videographers compromising on their vision because they couldn&apos;t find a quiet, controlled space. We saw artists with incredible ideas but no access to the high-end gear needed to execute them.
               </p>
 
               <div className="bg-[#C19A6B]/5 p-8 rounded-lg border-l-4 border-[#C19A6B] my-10">
                 <h3 className="text-2xl font-serif text-black mb-3">We decided to build the solution.</h3>
                 <p className="text-gray-700 italic">
-                  "A sanctuary where the chaos of the outside world is silenced, and the artist constructs their own reality."
+                  &ldquo;A sanctuary where the chaos of the outside world is silenced, and the artist constructs their own reality.&rdquo;
                 </p>
               </div>
 
@@ -153,13 +154,15 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <TeamSection />
+
 
       {/* Call to Action */}
       <section className="py-24 bg-[#C19A6B] text-white text-center px-6">
         <div className="container mx-auto max-w-2xl">
           <h2 className="text-4xl md:text-5xl font-serif mb-6">Ready to tell your story?</h2>
           <p className="text-white/80 mb-10 text-lg font-light">
-            Whether it's a rental or a full-scale production, we are ready to collaborate.
+            Whether it&apos;s a rental or a full-scale production, we are ready to collaborate.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link 
@@ -179,7 +182,7 @@ export default function AboutPage() {
                  <Camera className="w-6 h-6" />
                  <span className="text-xs font-bold tracking-widest uppercase">Equipment Rental</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-serif mb-6">Don't have the right gear?</h2>
+              <h2 className="text-3xl md:text-4xl font-serif mb-6">Don&apos;t have the right gear?</h2>
               <p className="text-white/80 font-light mb-8">
                 We rent out industry-standard cameras, lenses, and lighting. 
                 Already own gear? You can also list your equipment on our platform to earn extra income.

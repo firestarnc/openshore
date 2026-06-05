@@ -185,7 +185,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="text-xs text-[#C19A6B] font-bold tracking-widest uppercase mb-2">Inquiries</h4>
                   <p className="text-[#C19A6B]">hello@openshore.com</p>
-                  <p className="text-[#C19A6B]">+234 (706) 644-6442</p>
+                  <p className="text-[#C19A6B]">+234 (706) 442-6441</p>
                 </div>
               </div>
             </div>

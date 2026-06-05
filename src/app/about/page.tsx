@@ -77,7 +77,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="md:col-span-5 sticky top-24"
+              className="md:col-span-5"
             >
               <span className="text-[#C19A6B] text-xs font-bold tracking-[0.2em] uppercase block mb-6">
                 The Origin

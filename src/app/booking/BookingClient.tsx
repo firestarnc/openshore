@@ -248,6 +248,11 @@ export default function BookingClient() {
         time: selectedTime
     };
 
+    const liveCallbackUrl = process.env.NEXT_PUBLIC_PAYSTACK_CALLBACK_URL?.trim();
+    const callbackUrl = liveCallbackUrl && /^https?:\/\//.test(liveCallbackUrl)
+      ? liveCallbackUrl
+      : `${window.location.origin}/success`;
+
     // @ts-ignore
     if (typeof window.PaystackPop === 'undefined') {
       alert("Paystack connection failed. Please refresh and try again.");
@@ -259,6 +264,7 @@ export default function BookingClient() {
       key: process.env.NEXT_PUBLIC_PAYSTACK_KEY,
       email: currentData.email,
       amount: amount,
+      callback_url: callbackUrl,
       metadata: {
         custom_fields: [
             { display_name: "Package", variable_name: "package", value: currentData.packageName },
@@ -536,8 +542,8 @@ export default function BookingClient() {
               <Link href="/" className="text-3xl font-serif font-bold tracking-tighter block mb-6">
                 Open Shore
               </Link>
-             <p className="text-black font-light max-w-xs">
-                Capturing life's most beautiful moments with artistry and intention, serving creators across Benin City — GRA, Airport Road, Uselu, Ekenwan, Ugbowo, and beyond.
+              <p className="text-black font-light max-w-xs">
+                Capturing life's most beautiful moments with artistry and intention, serving creators across Benin City GRA, Airport Road, Uselu, Ekenwan, Ugbowo, and beyond.
               </p>
             </div>
 
@@ -609,14 +615,21 @@ export default function BookingClient() {
                   Instagram
                 </a>
               <a 
-                  href="https://www.youtube.com/@open.shore" 
+                  href="https://www.youtube.com/@OpenShore-u9z" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-[#C19A6B] transition-colors"
                 >
                   Youtube
                 </a>
-              <Link href="#">LinkedIn</Link>
+              <a 
+                  href="https://www.tiktok.com/@open.shore?_r=1&_t=ZS-96v3r77QF5F" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[#C19A6B] transition-colors"
+                >
+                  Tiktok
+                </a>
             </div>
           </div>
         </div>

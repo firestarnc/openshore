@@ -65,6 +65,8 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
+      <div className="absolute inset-0 z-1 bg-black/35" aria-hidden="true" /> // Overlay for better text contrast edited from text disapering with shutter
+
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto mt-20">
         <motion.span 

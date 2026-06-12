@@ -1,33 +1,9 @@
 import { MetadataRoute } from 'next';
-import { supabase } from '@/lib/supabase';
 
-// This tells Next.js to check for new cameras every hour
-export const revalidate = 3600;
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://openshorestudios.com';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://openshorestudios.com'; // <--- Confirmed new domain
-
-  // 1. Get all your Approved Cameras from the Database
-  let cameraRoutes: MetadataRoute.Sitemap = [];
-  
-  try {
-    const { data: cameras } = await supabase
-      .from('cameras')
-      .select('id, updated_at')
-      .eq('status', 'approved');
-
-    if (cameras) {
-      cameraRoutes = cameras.map((camera) => ({
-        url: `${baseUrl}/rent-camera/${camera.id}`,
-        lastModified: new Date(camera.updated_at || new Date()),
-        changeFrequency: 'weekly',
-        priority: 0.6, // Specific cameras get slightly lower priority than the main page
-      }));
-    }
-  } catch (error) {
-    console.error('Sitemap Error:', error);
-  }
-   /*
+  /*
   -----------------------------
   BLOG / RESOURCES ROUTES
   -----------------------------
@@ -94,5 +70,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 3. Combine them
-  return [...staticRoutes, ...resourceRoutes, ...cameraRoutes];
+  return [...staticRoutes, ...resourceRoutes];
 }

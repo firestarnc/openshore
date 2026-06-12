@@ -50,15 +50,32 @@ function ContactForm() {
 
     try {
       // 1. Save to Database
-      const { error } = await supabase.from('contact_messages').insert([{
+      const primaryInsert = await supabase.from('contact_messages').insert([{
           name: formData.name,
           email: formData.email,
           subject: formData.subject || "General Inquiry",
           message: formData.message,
-          status: 'new'
+          status: 'new',
+          sent_at: new Date().toISOString()
       }]);
 
-      if (error) throw error;
+      if (primaryInsert.error) {
+        const isSentAtMissing = primaryInsert.error.message.includes('sent_at');
+
+        if (isSentAtMissing) {
+          const fallbackInsert = await supabase.from('contact_messages').insert([{
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || "General Inquiry",
+            message: formData.message,
+            status: 'new',
+          }]);
+
+          if (fallbackInsert.error) throw fallbackInsert.error;
+        } else {
+          throw primaryInsert.error;
+        }
+      }
 
       // 2. Send Email
       await fetch('/api/send', {
@@ -72,7 +89,7 @@ function ContactForm() {
         })
       });
 
-      alert("Message sent successfully! We will be in touch.");
+      
       // Reset form (and clear the rental selection since it's sent)
       setFormData({ name: "", email: "", subject: "", message: "" });
 

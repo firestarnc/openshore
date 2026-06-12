@@ -9,7 +9,7 @@ import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { name: 'Homepage', href: '/' },
-  { name: 'Portfolio', href: '/portfolio/' },
+  { name: 'Portfolio', href: '/portfolio' },
   { name: 'Rent a Camera', href: '/rent-camera' },
   { name: 'Booking', href: '/booking' },
   { name: 'About', href: '/about' },

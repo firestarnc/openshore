@@ -65,8 +65,8 @@ const equipment = [
 ] satisfies EquipmentCategory[];
 
 const combos = [
-  { name: "A7siii & 24-70mm", price: "N50,000" },
-  { name: "A7iii & 16-35mm", price: "N30,000" },
+  { name: "A7siii & any lens", price: "N50,000" },
+  { name: "A7iii & any lens", price: "N30,000" },
 ];
 
 export default function RentCameraClient() {
@@ -189,10 +189,20 @@ export default function RentCameraClient() {
               {combos.map((combo) => (
                 <div
                   key={combo.name}
-                  className="flex items-center justify-between rounded-lg border border-[#C19A6B]/20 bg-white p-4"
+                  className="flex flex-col gap-3 rounded-lg border border-[#C19A6B]/20 bg-white p-4 md:flex-row md:items-center md:justify-between"
                 >
-                  <p className="text-sm md:text-base text-black font-medium">{combo.name}</p>
-                  <p className="text-[#C19A6B] font-bold text-sm md:text-base">{combo.price}</p>
+                  <div>
+                    <p className="text-sm md:text-base text-black font-medium">{combo.name}</p>
+                    <p className="text-[#C19A6B] font-bold text-sm md:text-base">{combo.price}</p>
+                  </div>
+                  <a
+                    href={`https://wa.me/2347064426441?text=Hello, I would like to rent the combo deal: ${combo.name}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded border border-[#C19A6B] px-4 py-2 text-[11px] font-bold tracking-widest text-[#C19A6B] transition-all hover:bg-[#C19A6B] hover:text-white"
+                  >
+                    RENT NOW
+                  </a>
                 </div>
               ))}
             </div>

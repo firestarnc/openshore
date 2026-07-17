@@ -47,6 +47,20 @@ The About page now includes a Supabase-backed team section. To populate it:
 
 The app derives public image URLs from Supabase Storage at render time, so only the storage path is stored in the `team_members` table.
 
+## Payment Webhook Setup
+
+Booking emails are now sent from the server via Paystack webhook events (`charge.success`) to avoid client-side delivery failures.
+
+1. Set environment variables in your deployment:
+	- `RESEND_API_KEY`
+	- `PAYSTACK_SECRET_KEY`
+	- `NEXT_PUBLIC_PAYSTACK_KEY`
+	- `NEXT_PUBLIC_PAYSTACK_CALLBACK_URL` (recommended: your `/success` URL)
+2. In Paystack dashboard, set webhook URL to:
+	- `https://<your-domain>/api/paystack/webhook`
+3. Ensure your sender domain (`openshorestudios.com`) is verified in Resend (SPF + DKIM).
+4. Run a test payment and confirm webhook delivery plus both booking emails.
+
 ### 1. Clone the Repository
 ```bash
 git clone [https://github.com/your-username/open-shore-studios.git](https://github.com/your-username/open-shore-studios.git)

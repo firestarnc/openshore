@@ -10,7 +10,7 @@ export default function SuccessPage() {
         <CheckCircle className="w-20 h-20 text-[#C19A6B] mb-6" />
         <h1 className="text-4xl font-serif text-[#C19A6B] mb-4">Booking Confirmed!</h1>
         <p className="text-gray-600 max-w-md mb-8">
-          Thank you for choosing Open Shore Studios. Your payment was successful, and we have emailed your receipt and booking details.
+          Thank you for choosing Open Shore Studios. Your payment was successful. Your booking details will be sent to your email shortly.
         </p>
         <Link 
           href="/"

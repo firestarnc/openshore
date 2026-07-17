@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { Check, Users, Video, Clock, ArrowRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 // --- CONFIGURATION: New Package Structure ---
@@ -65,7 +64,6 @@ const timeSlots = [
 ];
 
 export default function BookingClient() {
-  const router = useRouter(); // <-- ADD THIS LINE HERE
   const [selectedPackageId, setSelectedPackageId] = useState('');
   const [selectedOptionId, setSelectedOptionId] = useState(''); 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
@@ -198,24 +196,6 @@ export default function BookingClient() {
         throw new Error(`Database Error: ${error.message}`);
       }
 
-      const emailRes = await fetch('/api/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'booking',
-          name: snapshotData.name,
-          email: snapshotData.email,
-          phone: snapshotData.phone,
-          service: `${snapshotData.packageName} (${snapshotData.duration})`,
-          date: format(snapshotData.date, 'yyyy-MM-dd'),
-          time: snapshotData.time,
-          message: fullMessage
-        })
-      });
-      
-      if (!emailRes.ok) console.warn("Email warning:", await emailRes.text());
-
-   
       window.location.href = '/success';
 
     } catch (error: any) {
@@ -252,6 +232,7 @@ export default function BookingClient() {
     const callbackUrl = liveCallbackUrl && /^https?:\/\//.test(liveCallbackUrl)
       ? liveCallbackUrl
       : `${window.location.origin}/success`;
+    const bookingDate = format(selectedDate, 'yyyy-MM-dd');
 
     // @ts-ignore
     if (typeof window.PaystackPop === 'undefined') {
@@ -266,9 +247,23 @@ export default function BookingClient() {
       amount: amount,
       callback_url: callbackUrl,
       metadata: {
+        booking: {
+          name: currentData.name,
+          email: currentData.email,
+          phone: currentData.phone,
+          packageName: currentData.packageName,
+          duration: currentData.duration,
+          date: bookingDate,
+          time: currentData.time,
+          message: currentData.message,
+          price: currentData.price,
+        },
         custom_fields: [
             { display_name: "Package", variable_name: "package", value: currentData.packageName },
-            { display_name: "Duration", variable_name: "duration", value: currentData.duration }
+            { display_name: "Duration", variable_name: "duration", value: currentData.duration },
+            { display_name: "Date", variable_name: "date", value: bookingDate },
+            { display_name: "Time", variable_name: "time", value: currentData.time },
+            { display_name: "Client Email", variable_name: "client_email", value: currentData.email }
         ]
       },
       callback: (transaction: any) => {

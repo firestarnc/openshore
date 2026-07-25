@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
 import { sendBookingEmails } from '@/lib/email';
+import { saveBookingToSupabase } from '@/lib/bookings';
 
 type PaystackBookingMeta = {
   name?: string;
@@ -96,6 +97,23 @@ function extractBookingPayload(event: PaystackEvent) {
   };
 }
 
+async function saveBookingToSupabaseWithReference(payload: {
+  name: string;
+  email: string;
+  phone?: string;
+  service: string;
+  date: string;
+  time: string;
+  message: string;
+}, reference?: string) {
+  const bookingPayload = {
+    ...payload,
+    message: reference ? `${payload.message}\n\nPayment Ref: ${reference}` : payload.message,
+  };
+
+  await saveBookingToSupabase(bookingPayload);
+}
+
 export async function POST(request: Request) {
   try {
     const rawBody = await request.text();
@@ -121,13 +139,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ received: true, duplicate: true });
     }
 
+    await saveBookingToSupabaseWithReference(payload, reference);
     await sendBookingEmails(payload);
 
     if (reference) {
       processedReferences.add(reference);
     }
 
-    return NextResponse.json({ received: true, emailed: true });
+    return NextResponse.json({ received: true, saved: true, emailed: true });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown webhook error';
     console.error('Paystack webhook error:', message);

@@ -172,35 +172,34 @@ export default function BookingClient() {
 
     try {
       const fullMessage = `Payment Ref: ${reference.reference || 'N/A'}\nPackage: ${snapshotData.packageName}\nDuration: ${snapshotData.duration}\nPrice: ₦${snapshotData.price}\n\nUser Notes: ${snapshotData.message}`;
-      
-      console.log("Saving to Supabase...", snapshotData);
 
-      const { data, error } = await supabase
-        .from('bookings')
-        .insert([
-          {
-            session_type: `${snapshotData.packageName} - ${snapshotData.duration}`,
-            booking_date: format(snapshotData.date, 'yyyy-MM-dd'),
-            booking_time: snapshotData.time,
-            user_name: snapshotData.name,
-            user_email: snapshotData.email,
-            user_phone: snapshotData.phone,
-            message: fullMessage,
-            status: 'paid'
-          },
-        ])
-        .select(); 
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: snapshotData.name,
+          email: snapshotData.email,
+          phone: snapshotData.phone,
+          service: `${snapshotData.packageName} - ${snapshotData.duration}`,
+          date: format(snapshotData.date, 'yyyy-MM-dd'),
+          time: snapshotData.time,
+          message: fullMessage,
+        }),
+      });
 
-      if (error) {
-        console.error("Supabase Error:", error); 
-        throw new Error(`Database Error: ${error.message}`);
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to save booking.');
       }
 
       window.location.href = '/success';
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
       console.error('FULL ERROR:', error);
-      alert('Error: ' + error.message);
+      alert('Error: ' + message);
     } finally {
       setLoading(false);
     }

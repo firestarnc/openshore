@@ -31,6 +31,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown booking save error';
+    const normalizedMessage = message.toLowerCase();
+
+    if (normalizedMessage.includes('duplicate') || normalizedMessage.includes('already exists')) {
+      return NextResponse.json({ success: true, duplicate: true });
+    }
+
     console.error('Booking save error:', message);
     return NextResponse.json({ error: 'Failed to save booking.', details: message }, { status: 500 });
   }
